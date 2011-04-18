@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Small script for watching a the current directory and running
+# a command if anything changes.  Depends on inotify-tools.
+#
+# I use it like:  hawk mvn clean test
+
 DIR=`pwd`;
 CMD=$@;
 
