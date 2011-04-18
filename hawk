@@ -1,0 +1,19 @@
+#!/bin/bash
+
+DIR=`pwd`;
+CMD=$@;
+
+echo;
+echo "Watching '$DIR' like a hawk"
+echo "Will run '$CMD' if anything changes";
+
+cd $DIR
+
+while true;
+do 
+  echo;
+  echo "the hawk is waiting...";
+  inotifywait -q -r $DIR @$DIR/.idea -e modify -e create -e delete -e move > /dev/null;
+  echo "the hawk is running $CMD";
+  ( $CMD )
+done
