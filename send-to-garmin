@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# wraps up gpsbabel stuff needed to simplify a route to 250 points
+# and send it to a usb-connected garmin etrex
+# probably of limited use to anyone who is not me :)
+
+if [[ ! -e $1 ]]  || [[ ! -n $1 ]]; then
+  echo "Give me a file, dummy";
+  exit;
+fi
+
+if [ "x`which gpsbabel`" = "x" ]; then
+  echo "Fatal error right here: you forgot to install gpsbabel, dummy";
+  exit;
+fi
+
+echo "Simplifying & sending $1";
+
+gpsbabel -r -i gpx -f $1 -x simplify,count=250 -o garmin -F usb:
