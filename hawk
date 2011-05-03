@@ -6,6 +6,7 @@
 # I use it like:  hawk mvn clean test
 
 if [ "x`which inotifywait`" = "x" ]; then 
+  echo;
   echo "Fatal error right here:";
   echo "  The hawk needs inotify-tools to be installed."; 
   echo "  Try apt-get or yum, or whatever.";
@@ -15,6 +16,14 @@ fi
 DIR=`pwd`;
 CMD=$@;
 
+if [ "x$CMD" = "x" ]; then
+  echo;
+  echo "Warning right here:";
+  echo "  You didn't specify a command, like 'hawk command'";
+  echo "  I'll just shout a bit";
+  CMD="echo HAWKY HAWK!";
+fi
+ 
 echo;
 echo "Watching '$DIR' like a hawk"
 echo "Will run '$CMD' if anything changes";
