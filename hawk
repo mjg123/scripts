@@ -5,6 +5,13 @@
 #
 # I use it like:  hawk mvn clean test
 
+if [ "x`which inotifywait`" = "x" ]; then 
+  echo "Fatal error right here:";
+  echo "  The hawk needs inotify-tools to be installed."; 
+  echo "  Try apt-get or yum, or whatever.";
+  exit;
+fi
+
 DIR=`pwd`;
 CMD=$@;
 
